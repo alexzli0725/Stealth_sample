@@ -1,8 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import NavigationButton from "./NavigationButton";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // const handleLink = () => {
+  //   setLink(link);
+  //   navigate(link);
+  // };
+
   const pages = [
     { id: 1, title: "Home", link: "/" },
     { id: 2, title: "Launchpad", link: "/launchpad" },
@@ -16,26 +24,26 @@ const Header = () => {
       {pages.map((item, index) => (
         <div className="group hover:cursor-pointer" key={index}>
           <p
-            onClick={() => navigate(`${item.link}`)}
-            className="header-link group-hover:text-green-500"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(item.link);
+            }}
+            className={`header-link group-hover:text-green-500 ${
+              location.pathname === item.link ? "text-green-500" : ""
+            }`}
+            aria-current={location.pathname === item.link ? "page" : undefined}
           >
             {item.title}
           </p>
-          <div className="h-[2px] ml-auto mr-auto bg-green-500 w-0 group-hover:w-full transition-all duration-300" />
+          <div
+            className={`h-[2px] ml-auto mr-auto bg-green-500 w-0 group-hover:w-full transition-all duration-300 ${
+              location.pathname === item.link ? "w-full" : "w-0"
+            }`}
+          />
         </div>
       ))}
-      <button
-        onClick={() => navigate(`/ethereum`)}
-        className="hover:text-green-500 border-[1.5px] px-[10px] py-[5px] rounded-[15px] border-green-500"
-      >
-        <p>Ethereum</p>
-      </button>
-      <button
-        onClick={() => navigate(`/connect`)}
-        className="hover:text-green-500 border-[1.5px] px-[10px] py-[5px] rounded-[15px] border-green-500"
-      >
-        <p>Connect</p>
-      </button>
+      <NavigationButton path="/ethereum" label="Ethereum" />
+      <NavigationButton path="/connect" label="Connect" />
     </div>
   );
 };

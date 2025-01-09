@@ -12,17 +12,19 @@ import Connect from "./pages/Connect";
 function App() {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" Component={Home} />
-        <Route path="/launchpad" Component={Launchpad} />
-        <Route path="/nft" Component={NFT} />
-        <Route path="/create" Component={Create} />
-        <Route path="/locker" Component={Locker} />
-        <Route path="/botyard" Component={Bot_Yard} />
-        <Route path="/ethereum" Component={Ethereum} />
-        <Route path="/connect" Component={Connect} />
-      </Routes>
+      <div className="text-white flex flex-col bg-gradient-to-t from-black to-gray-900 min-h-screen">
+        <Header />
+        <Routes>
+          <Route path="/" Component={Home} />
+          <Route path="/launchpad" Component={Launchpad} />
+          <Route path="/nft" Component={NFT} />
+          <Route path="/create" Component={Create} />
+          <Route path="/locker" Component={Locker} />
+          <Route path="/botyard" Component={Bot_Yard} />
+          <Route path="/ethereum" Component={Ethereum} />
+          <Route path="/connect" Component={Connect} />
+        </Routes>
+      </div>
     </Router>
   );
 }
